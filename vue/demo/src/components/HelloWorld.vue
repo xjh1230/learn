@@ -1,21 +1,24 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-
+    <FormExample></FormExample>
     <button @click="showNotice">弹窗</button>
   </div>
 </template>
 
 <script>
-import Notice from "./notice/index";
+import FormExample from "./form";
+import Notice from "./notice";
 
 // 导出的是组件配置对象，它是一个普通js对象
 export default {
   name: "HelloWorld",
   props: {
-    msg: String,
+    msg: String
   },
-  components: {},
+  components: {
+    FormExample
+  },
   methods: {
     showNotice() {
       let msg = Math.random()
@@ -23,10 +26,10 @@ export default {
         .substring(2, 10);
       this.$createNotice({
         title: "村长喊你来搬砖",
-        msg: msg,
+        msg: msg
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

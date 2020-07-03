@@ -1,7 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h2>{{ $store.state.counter }}--{{ $store.state.msg }}</h2>
+    <h3>{{ $store.getters.doubleCounter }}</h3>
+    <p @click="$store.commit('add')">counter: {{ $store.state.counter }}</p>
+    <p @click="$store.dispatch('add')">
+      async counter: {{ $store.state.counter }}
+    </p>
     <FormExample></FormExample>
+
     <button @click="showNotice">弹窗</button>
   </div>
 </template>
@@ -14,10 +21,10 @@ import Notice from "./notice";
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
   components: {
-    FormExample
+    FormExample,
   },
   methods: {
     showNotice() {
@@ -26,10 +33,10 @@ export default {
         .substring(2, 10);
       this.$createNotice({
         title: "村长喊你来搬砖",
-        msg: msg
+        msg: msg,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

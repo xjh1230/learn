@@ -8,6 +8,7 @@ const initInstance = () => {
     // instance = new NoticeBoxCtor({ el: document.createElement("div") });
     instance = new NoticeBoxCtor();
     instance.$mount();
+    console.log(instance.$el, '0000000000')
 };
 const hasOwn = Object.prototype.hasOwnProperty;
 const showNotice = function(options) {
@@ -21,13 +22,14 @@ const showNotice = function(options) {
             }
         }
         document.body.appendChild(instance.$el);
-
+        console.log(instance.$el, 1111111111)
         instance.show();
 
         instance.remove = function() {
             document.body.removeChild(instance.$el);
-            // instance.$destroy();
-            // instance.$destroy();
+            console.log(instance.$el, 2222222222)
+                // instance.$destroy();
+                // instance.$destroy();
             console.log(12345678);
         };
     }

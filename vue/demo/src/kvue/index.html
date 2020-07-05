@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{counter}}</p>
+      <!-- <p @click="()=>{console.log(123)}">{{counter}}</p> -->
+      <p
+        k-text="msg"
+        @click="onclick"
+        style="color: blue; cursor: pointer;"
+      ></p>
+      <p k-html="desc"></p>
+      <p>{{arr}}</p>
+    </div>
+
+    <script src="index.js"></script>
+
+    <script>
+      const app = new KVue({
+        el: "#app",
+        data: {
+          counter: 1,
+          desc: 'kvue<span style="color:red">真棒</span>',
+          msg: "冬瓜冬瓜我是西瓜",
+          arr: [1, 2, 3],
+        },
+        methods: {
+          onclick() {
+            // this必须是组件实例
+            // console.log(this.counter);
+            // alert(this.counter);
+            this.arr.push(1);
+          },
+        },
+      });
+      setInterval(() => {
+        app.counter++;
+      }, 2000);
+    </script>
+  </body>
+</html>

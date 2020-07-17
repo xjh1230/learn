@@ -1,43 +1,77 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>{{ $store.state.counter }}--{{ $store.state.msg }}</h2>
-    <h3>{{ $store.getters.doubleCounter }}</h3>
-    <p @click="$store.commit('add')">counter: {{ $store.state.counter }}</p>
-    <p @click="$store.dispatch('add')">
-      async counter: {{ $store.state.counter }}
+    <p>
+      For a guide and recipes on how to configure / customize this project,
+      <br />check out the
+      <a
+        href="https://cli.vuejs.org"
+        target="_blank"
+        rel="noopener"
+      >vue-cli documentation</a>.
     </p>
-    <FormExample></FormExample>
-
-    <button @click="showNotice">弹窗</button>
+    <h3>Installed CLI Plugins</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
+          target="_blank"
+          rel="noopener"
+        >typescript</a>
+      </li>
+    </ul>
+    <h3>Essential Links</h3>
+    <ul>
+      <li>
+        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
+      </li>
+      <li>
+        <a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a>
+      </li>
+      <li>
+        <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a>
+      </li>
+      <li>
+        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
+      </li>
+    </ul>
+    <h3>Ecosystem</h3>
+    <ul>
+      <li>
+        <a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a>
+      </li>
+      <li>
+        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
+      </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-devtools#vue-devtools"
+          target="_blank"
+          rel="noopener"
+        >vue-devtools</a>
+      </li>
+      <li>
+        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a>
+      </li>
+      <li>
+        <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a>
+      </li>
+    </ul>
   </div>
 </template>
 
-<script>
-import FormExample from "./form";
-import Notice from "./notice";
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-// 导出的是组件配置对象，它是一个普通js对象
-export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
-  },
-  components: {
-    FormExample,
-  },
-  methods: {
-    showNotice() {
-      let msg = Math.random()
-        .toFixed(16)
-        .substring(2, 10);
-      this.$createNotice({
-        title: "村长喊你来搬砖",
-        msg: msg,
-      });
-    },
-  },
-};
+@Component
+class HelloWorld extends Vue {
+  @Prop() private msg!: string;
+}
+
+export default HelloWorld;
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

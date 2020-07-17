@@ -1,7 +1,7 @@
 <template>
   <div class="box" v-if="isShow">
-    <h3>{{title}}</h3>
-    <p class="box-content">{{msg}}</p>
+    <h3>{{ title }}</h3>
+    <p class="box-content">{{ msg }}</p>
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style   scoped>
+<style scoped>
 .box {
   position: fixed;
   width: 100%;

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label v-if="label">{{label}}</label>
+    <label v-if="label">{{ label }}</label>
     <slot></slot>
-    <p v-if="error" class="error">{{error}}</p>
+    <p v-if="error" class="error">{{ error }}</p>
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style   scoped>
+<style scoped>
 .error {
   color: red;
 }

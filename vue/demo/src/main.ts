@@ -4,6 +4,10 @@ import App from "./App.vue";
 import store from "./kstore";
 import T from "./test/test";
 
+import router from "./router";
+
+import "@/icons";
+
 Vue.config.productionTip = false;
 
 var t = new T();
@@ -12,6 +16,7 @@ t.logFn(123);
 t.setBar("123");
 var vm = new Vue({
   store,
+  router,
   render: (h) => h(App),
 }).$mount("#app");
-console.log(vm);
+// console.log(vm);

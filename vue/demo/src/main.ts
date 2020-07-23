@@ -1,11 +1,12 @@
 import Vue from "vue";
 import App from "./App.vue";
 // import store from "./store";
-import store from "./kstore";
+import store from "./store";
+import "./plugins/element.js";
 import T from "./test/test";
 
 import router from "./router";
-
+import "./promission.js";
 import "@/icons";
 
 Vue.config.productionTip = false;

@@ -47,4 +47,14 @@ var t = new T();
 t.logFn(123);
 t.setBar("123");
 
+function testReload(a: number): any;
+
+function testReload(a: string, b: string): any;
+
+function testReload(a: string | number, b?: string) {
+  console.log(a, b);
+}
+
+testReload(1);
+testReload("a", "b");
 export default T;

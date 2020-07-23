@@ -4,42 +4,38 @@ import Router from "vue-router";
 
 Vue.use(Router);
 
-export const constRouters = [
-  {
-    path: "/login",
-    component: () => import("@/views/Login.vue"),
-    hidden: true,
-  },
-  {
-    path: "/",
-    component: () => {
-      import("@/views/Home.vue");
+export const constRouters = [{
+        path: "/login",
+        component: () =>
+            import ("@/views/Login.vue"),
+        hidden: true,
     },
-    name: "home",
-    meta: {
-      title: "Home",
-      icon: "qq",
+    {
+        path: "/",
+        component: () =>
+            import ( /* webpackChunkName: "home" */ "@/views/Home.vue"),
+        name: "home",
+        meta: {
+            title: "Home",
+            icon: "qq",
+        },
     },
-  },
 ];
 
-export const asyncRoutes = [
-  {
+export const asyncRoutes = [{
     path: "/about",
-    component: () => {
-      import("@/views/About.vue");
-    },
+    component: () =>
+        import ( /* webpackChunkName: "home" */ "@/views/About.vue"),
     name: "about",
     mata: {
-      title: "About",
-      icon: "denglong",
-      roles: ["admin", "editor"],
+        title: "About",
+        icon: "denglong",
+        roles: ["admin", "editor"],
     },
-  },
-];
+}, ];
 
 export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: constRouters,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: constRouters,
 });

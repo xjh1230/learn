@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, combineReducers } from "../kredux";
 // import logger from "redux-logger";
 function countReducer(state = 0, action) {
   let tmp = action.payload || 1;
-  console.log(action, 123);
+  // console.log(action, 123);
   switch (action.type) {
     case "ADD":
       return state + tmp;
@@ -19,12 +19,12 @@ function countReducer(state = 0, action) {
 
 function countReducer2(state = { num: 0, msg: "毛里塔尼亚" }, action) {
   let tmp = action.payload || 1;
-  console.log(action, 456);
+  // console.log(action, 456);
   switch (action.type) {
     case "ADD22":
       return { ...state, num: state.num + tmp };
     default:
-      console.log(state, 1111111);
+      // console.log(state, 1111111);
       return state;
   }
 }

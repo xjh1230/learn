@@ -11,13 +11,13 @@ export default function applyMiddleware(...middlewares) {
     };
     let middlewareChain = middlewares.map((middleware) => middleware(midApi));
     let comp = compose(...middlewareChain);
-    let newdispatch2 = comp(dispatch);
-    // let newdispatch = (dispatch = comp(dispatch));
+    // let newdispatch= comp(dispatch);
+    let newdispatch = (dispatch = comp(dispatch));
     // console.log(newdispatch);
-    console.log(newdispatch2);
+    // console.log(newdispatch);
     return {
       ...store,
-      dispatch: newdispatch2,
+      dispatch: newdispatch,
     };
   };
 }

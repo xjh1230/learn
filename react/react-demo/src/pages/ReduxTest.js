@@ -26,14 +26,22 @@ export default class ReduxTest extends Component {
     });
   };
   promiseMinus = () => {};
+  add2 = () => {
+    store.dispatch({ type: "ADD2", payload: 12 });
+  };
   render() {
     return (
       <div>
         <h3>ReduxPage</h3>
-        <p>{store.getState()}</p>
+        <p>{store.getState().count}</p>
         <button onClick={this.add}>add</button>
         <button onClick={this.asyAdd}>asyAdd</button>
         <button onClick={this.promiseMinus}>promise minus</button>
+
+        <p>{store.getState().count2.num}</p>
+        <button onClick={this.add2}>
+          addd count 2 {store.getState().count2.msg}
+        </button>
       </div>
     );
   }

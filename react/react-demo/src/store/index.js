@@ -21,7 +21,7 @@ function countReducer2(state = { num: 0, msg: "毛里塔尼亚" }, action) {
   let tmp = action.payload || 1;
   // console.log(action, 456);
   switch (action.type) {
-    case "ADD22":
+    case "ADD2":
       return { ...state, num: state.num + tmp };
     default:
       // console.log(state, 1111111);
@@ -65,3 +65,21 @@ function thunk({ getState, dispatch }) {
     return next(action);
   };
 }
+
+// import { createStore, combineReducers } from "redux";
+
+// // 定义修改规则
+// export const counterReducer = (state = 0, { type, payload = 1 }) => {
+//   switch (type) {
+//     case "ADD":
+//       return state + payload;
+//     case "MINUS":
+//       return state - payload;
+//     default:
+//       return state;
+//   }
+// };
+
+// const store = createStore(combineReducers({ count: counterReducer }));
+
+// export default store;

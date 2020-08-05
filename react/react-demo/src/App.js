@@ -5,12 +5,14 @@ import "./App.css";
 import MyRcFieldForm from "./pages/MyRcFieldForm";
 import ReduxTest from "./pages/ReduxTest";
 import MyRcForm from "./pages/MyRcForm";
+import HookTest from "./pages/HookTest";
 
 function App() {
   return (
     <div className="App">
       {/* <MyRcForm name="Foo" /> */}
-      <ReduxTest />
+      {/* <ReduxTest /> */}
+      <HookTest />
     </div>
   );
 }

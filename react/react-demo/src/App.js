@@ -20,9 +20,9 @@ function App() {
       {/* <MyRcForm name="Foo" /> */}
       {/* <ReduxTest /> */}
       {/* <HookTest /> */}
-      {/* <MyReactRedux /> */}
+      <MyReactRedux />
       {/* <MyReactReduxHook /> */}
-      <MyRouterPage />
+      {/* <MyRouterPage /> */}
     </div>
   );
 }

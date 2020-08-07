@@ -3,6 +3,9 @@ import { createStore, applyMiddleware, combineReducers } from "../kredux";
 
 // import thunk from "redux-thunk";
 // import logger from "redux-logger";
+
+import thunk from "../kreact-redux/kredux-thunk";
+import logger from "../kreact-redux/kredux-logger";
 function countReducer(state = 0, action) {
   let tmp = action.payload || 1;
   // console.log(action, 123);
@@ -34,37 +37,37 @@ const store = createStore(
     count: countReducer,
     count2: countReducer2,
   }),
-  applyMiddleware(thunk)
+  applyMiddleware(thunk, logger)
 );
 
 export default store;
 
-function logger({ getState }) {
-  return (next) => (action) => {
-    // console.log("**************");
+// function logger({ getState }) {
+//   return (next) => (action) => {
+//     // console.log("**************");
 
-    //dispatch(action)
-    let returnVal = next(action);
-    // console.log(getState());
-    // console.log("**************");
-    return returnVal;
-  };
-}
+//     //dispatch(action)
+//     let returnVal = next(action);
+//     // console.log(getState());
+//     // console.log("**************");
+//     return returnVal;
+//   };
+// }
 
-function thunk({ getState, dispatch }) {
-  return (next) => (action) => {
-    // console.log(next);
-    // console.log(action);
-    // console.log(getState);
-    console.log(action);
-    console.log(123456);
-    if (typeof action == "function") {
-      //   console.log(2223344);
-      return action(dispatch, getState);
-    }
-    return next(action);
-  };
-}
+// function thunk({ getState, dispatch }) {
+//   return (next) => (action) => {
+//     // console.log(next);
+//     // console.log(action);
+//     // console.log(getState);
+//     console.log(action);
+//     console.log(123456);
+//     if (typeof action == "function") {
+//       //   console.log(2223344);
+//       return action(dispatch, getState);
+//     }
+//     return next(action);
+//   };
+// }
 
 // import { createStore, combineReducers } from "redux";
 

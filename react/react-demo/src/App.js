@@ -14,6 +14,7 @@ import MyReactReduxHook from "./pages/MyReactReduxHook";
 
 import MyRouterPage from "./pages/MyRouterPage";
 
+import "./util/test";
 function App() {
   return (
     <div className="App">

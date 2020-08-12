@@ -1,6 +1,3 @@
-function isPromise(obj) {
-  return Promise.resolve(obj) == obj;
-}
 async function asyncAdd(a, b, callback) {
   // console.log("asyncAdd", a, b);
   setTimeout(() => {
@@ -17,18 +14,12 @@ function createPromise(a, b) {
   });
 }
 async function sum2(...rest) {
-  var hasTest = false;
   return await rest.reduce((prevPromise, next) => {
-    const prev = prevPromise;
-    if (hasTest || !isPromise(prevPromise)) {
-      hasTest = true;
-      prevPromise = Promise.resolve(prev);
-    }
     return prevPromise.then((id) => {
       console.log(id, next, "aaa");
       return createPromise(id, next);
     });
-  });
+  }, Promise.resolve(0));
 }
 
 async function sum(...rest) {
@@ -53,14 +44,14 @@ async function sum(...rest) {
 
 let start = window.performance.now();
 
-sum2(1, 2, 3, 4, 5, 6).then((res) => {
+sum(1, 2, 3, 4, 5, 6).then((res) => {
   console.log("sum", res);
   console.log(`程序执行耗时：${window.performance.now() - start}`);
 });
 
-// // sum2();
-// start = window.performance.now();
-// sum2(1, 2, 3, 4, 5, 6).then((res) => {
-//   console.log("sum2", res);
-//   console.log(`程序执行耗时：${window.performance.now() - start}`);
-// });
+// sum2();
+start = window.performance.now();
+sum2(1, 2, 3, 4, 5, 6).then((res) => {
+  console.log("sum2", res);
+  console.log(`程序执行耗时：${window.performance.now() - start}`);
+});

@@ -41,22 +41,22 @@ class MyClassCmp extends Component {
 function MyFuncCmp(props) {
   return <div className="border">我是func组建-name-{props.name}</div>;
 }
-// var jsx = (
-//   <div className="border">
-//     <p>my-react</p>
-//     <a href="https://zh-hans.reactjs.org/">react文档</a>
-//     <MyClassCmp name={"MyClassCmp"} />
-//     <MyFuncCmp name={"MyFuncCmp"} />
+var jsx = (
+  <div className="border">
+    <p>my-react</p>
+    <a href="https://zh-hans.reactjs.org/">react文档</a>
+    <MyClassCmp name={"MyClassCmp"} />
+    <MyFuncCmp name={"MyFuncCmp"} />
 
-//     <>
-//       <h1>aaa</h1>
-//       <h1>bbb</h1>
-//     </>
-//   </div>
-// );
+    <>
+      <h1>aaa</h1>
+      <h1>bbb</h1>
+    </>
+  </div>
+);
 
-var jsx2 = <MyClassCmp name={"MyClassCmp"} />;
-ReactDOM.render(jsx2, document.getElementById("root"));
+// var jsx2 = <MyClassCmp name={"MyClassCmp"} />;
+ReactDOM.render(jsx, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

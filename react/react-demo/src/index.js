@@ -1,4 +1,3 @@
-// import React from "react";
 // import ReactDOM from "react-dom";
 // import React, { Component } from "react";
 import React, { Component } from "./kreact/index";
@@ -10,15 +9,11 @@ import * as serviceWorker from "./serviceWorker";
 
 // import { Provider } from "react-redux";
 import { Provider } from "./kreact-redux/";
+import DiffPage from "./pages/DiffPage";
 import store from "./store/";
 
-console.log("store", store);
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <App />
-//   </Provider>,
-//   document.getElementById("root")
-// );
+// import "./util/test";
+// console.log("store", store);
 
 //myreact
 class MyClassCmp extends Component {
@@ -47,6 +42,7 @@ var jsx = (
     <a href="https://zh-hans.reactjs.org/">react文档</a>
     <MyClassCmp name={"MyClassCmp"} />
     <MyFuncCmp name={"MyFuncCmp"} />
+    <DiffPage />
 
     <>
       <h1>aaa</h1>
@@ -55,8 +51,13 @@ var jsx = (
   </div>
 );
 
-// var jsx2 = <MyClassCmp name={"MyClassCmp"} />;
-ReactDOM.render(jsx, document.getElementById("root"));
+var jsx2 = (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+var jsx3 = <DiffPage />;
+ReactDOM.render(jsx3, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

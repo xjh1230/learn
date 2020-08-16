@@ -14,16 +14,20 @@ import MyReactReduxHook from "./pages/MyReactReduxHook";
 
 import MyRouterPage from "./pages/MyRouterPage";
 
-import "./util/test";
+import UseCallbackPage from "./pages/UseCallbackPage";
+import UseMemoPage from "./pages/UseMemoPage";
+
 function App() {
   return (
     <div className="App">
       {/* <MyRcForm name="Foo" /> */}
       {/* <ReduxTest /> */}
       {/* <HookTest /> */}
-      <MyReactRedux />
+      {/* <MyReactRedux /> */}
       {/* <MyReactReduxHook /> */}
       {/* <MyRouterPage /> */}
+      <UseCallbackPage />
+      <UseMemoPage />
     </div>
   );
 }

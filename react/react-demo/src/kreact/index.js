@@ -1,5 +1,5 @@
 function createElement(type, config, ...children) {
-  console.log("react", type, config, children);
+  // console.log("react", type, config, children);
   if (config) {
     delete config.__self;
     delete config.__source;

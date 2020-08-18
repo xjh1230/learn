@@ -1,5 +1,7 @@
 function createElement(type, config, ...children) {
-  // console.log("react", type, config, children);
+  if (!config) {
+    console.log("react", config, type, children);
+  }
   if (config) {
     delete config.__self;
     delete config.__source;
@@ -21,7 +23,10 @@ function createElement(type, config, ...children) {
     }
     props["anhao"] = "喀麦隆";
   }
+  delete props.key;
+
   return {
+    key: (config && config.key) || "",
     type: type,
     props: props,
   };

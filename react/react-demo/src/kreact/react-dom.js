@@ -38,7 +38,8 @@ function createNode(vnode) {
       : updateFunctionComponent(vnode);
   } else {
     // console.log("createNode", props);
-    node = document.createDocumentFragment();
+    //node = document.createDocumentFragment();
+    //reconcileChildren();
     // node = document.createElement("div");
   }
   // console.log("vnode", vnode);
@@ -46,6 +47,7 @@ function createNode(vnode) {
   return node;
 }
 function updateNode(node, prevProps, props) {
+  console.log("props", props);
   Object.keys(prevProps)
     .filter((k) => k != "children")
     .forEach((k) => {
@@ -54,7 +56,7 @@ function updateNode(node, prevProps, props) {
         node.removeEventListener(eventName, prevProps[k]);
       } else {
         if (!(k in props)) {
-          node.removeAttribute(k);
+          node[k] = "";
         }
       }
     });
@@ -72,12 +74,11 @@ function updateNode(node, prevProps, props) {
 }
 function updateClassComponent(fiber) {
   // wipFiber = fiber;
-
   const { type, props } = fiber;
   const cmp = new type(props);
   const vnode = cmp.render();
   const children = [vnode];
-  console.log("class-children", vnode, fiber.node);
+  // console.log("class-children", vnode, fiber.node);
   reconcileChildren(fiber, children);
 }
 function updateFunctionComponent(fiber) {
@@ -85,9 +86,9 @@ function updateFunctionComponent(fiber) {
   wipFiber.hooks = [];
   wipFiber.hookIndex = 0;
   const { type, props } = fiber;
-  let node = type(props);
-  console.log("function-comp", node, fiber.node);
-  const children = [node];
+  let vnode = type(props);
+  // console.log("function-comp", vnode, fiber.node);
+  const children = [vnode];
   reconcileChildren(fiber, children);
 }
 function reconcileChildren_old(workInProgressFiber, children) {
@@ -190,7 +191,12 @@ function mapRemainingChildren(returnFiber, currentFirstChild) {
   }
   return existingChildren;
 }
-function reconcileChildren_my(returnFiber, children) {
+
+function reconcileChildren(returnFiber, children) {
+  if (returnFiber.type === "ul") {
+    console.log("returnFiber", returnFiber);
+  }
+  //几内亚
   let prevNewFiber = null;
   //oldfiber 的第一个child
   let oldFiber = returnFiber.base && returnFiber.base.child;
@@ -205,7 +211,6 @@ function reconcileChildren_my(returnFiber, children) {
   if (!oldFiber) {
     shouldTrackSideEffects = false;
   }
-
   //更新，子节点位置相同
   for (; oldFiber !== null && newIndex < children.length; newIndex++) {
     //疑问
@@ -239,7 +244,7 @@ function reconcileChildren_my(returnFiber, children) {
       shouldTrackSideEffects
     );
     if (prevNewFiber === null) {
-      returnFiber.child = newChild;
+      returnFiber.child = newFiber;
     } else {
       prevNewFiber.sibling = newFiber;
     }
@@ -284,6 +289,7 @@ function reconcileChildren_my(returnFiber, children) {
       }
       prevNewFiber = newFiber;
     }
+    return;
   }
   //新老节点都还有，乱序更新
   const exitOldMap = mapRemainingChildren(returnFiber, oldFiber);
@@ -328,8 +334,8 @@ function reconcileChildren_my(returnFiber, children) {
     }
     prevNewFiber = newFiber;
   }
+  //更新阶段 乱序更新后 oldMap还有值的话，全部删除
   if (shouldTrackSideEffects) {
-    //更新阶段 乱序更新后 oldMap还有值的话，全部删除
     exitOldMap.forEach((child) => {
       deletions.push({
         ...child,
@@ -339,7 +345,7 @@ function reconcileChildren_my(returnFiber, children) {
   }
 }
 
-function reconcileChildren(returnFiber, newChildren) {
+function reconcileChildren_teacher(returnFiber, newChildren) {
   let previousNewFiber = null;
 
   // oldfiber 的第一个子fiber
@@ -519,6 +525,10 @@ function updateHostComponent(fiber) {
 
   reconcileChildren(fiber, children);
 }
+function updateFragementComponent(fiber) {
+  const { children } = fiber.props;
+  reconcileChildren(fiber, children);
+}
 function performNextUnitofWork(fiber) {
   //执行当前work
   const { type } = fiber;
@@ -527,8 +537,11 @@ function performNextUnitofWork(fiber) {
     type.prototype.isReactComponent
       ? updateClassComponent(fiber)
       : updateFunctionComponent(fiber);
-  } else {
+  } else if (typeof type === "string") {
+    console.log("fiber", fiber);
     updateHostComponent(fiber);
+  } else {
+    updateFragementComponent(fiber);
   }
 
   //获取下一个fiber
@@ -575,14 +588,16 @@ function commitWorker(fiber) {
   if (!fiber) {
     return;
   }
-  commitWorker(fiber.child);
+
   let parentNodeFiber = fiber.return;
   while (!parentNodeFiber.node) {
     //类组件，函数组件的根就没有node
     // console.log("parentNodeFiber", parentNodeFiber);
     parentNodeFiber = parentNodeFiber.return;
   }
+
   const parentNode = parentNodeFiber.node;
+
   if (fiber.effectTag === PLACEMENT && fiber.node !== null) {
     // parentNode.appendChild(fiber.node);
     insertOrAppend(fiber, parentNode);
@@ -591,6 +606,7 @@ function commitWorker(fiber) {
   } else if (fiber.effectTag === DELETION && fiber.node !== null) {
     commitDeletions(fiber, parentNode);
   }
+  commitWorker(fiber.child);
   commitWorker(fiber.sibling);
 }
 function commitDeletions(fiber, parent) {

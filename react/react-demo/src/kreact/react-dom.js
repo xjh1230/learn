@@ -47,7 +47,7 @@ function createNode(vnode) {
   return node;
 }
 function updateNode(node, prevProps, props) {
-  console.log("props", props);
+  // console.log("props", props);
   Object.keys(prevProps)
     .filter((k) => k != "children")
     .forEach((k) => {
@@ -538,7 +538,7 @@ function performNextUnitofWork(fiber) {
       ? updateClassComponent(fiber)
       : updateFunctionComponent(fiber);
   } else if (typeof type === "string") {
-    console.log("fiber", fiber);
+    // console.log("fiber", fiber);
     updateHostComponent(fiber);
   } else {
     updateFragementComponent(fiber);
@@ -647,10 +647,12 @@ export function useState(init) {
 
   // 更新hook.state
   // 这里模拟一下批量更新
-  hook.queue.forEach((action) => (hook.state = action));
-
+  // hook.queue.forEach((action) => (hook.state = action));
+  while (hook.queue.length > 0) {
+    hook.state = hook.queue.shift();
+  }
   const setState = (action) => {
-    console.log("action", action);
+    // console.log("action", action);
     // 每次执行setState，接收新的action，这里存到数组，因为等下要批量更新，执行遍历
     hook.queue.push(action);
     wipRoot = {

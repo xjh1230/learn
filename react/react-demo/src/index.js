@@ -1,7 +1,7 @@
 // import ReactDOM from "react-dom";
 // import React, { Component } from "react";
 import React, { Component } from "./kreact/index";
-import ReactDOM from "./kreact/react-dom";
+import ReactDOM, { useState } from "./kreact/react-dom";
 
 import "./index.css";
 import App from "./App";
@@ -34,7 +34,13 @@ class MyClassCmp extends Component {
   }
 }
 function MyFuncCmp(props) {
-  return <div className="border">我是func组建-name-{props.name}</div>;
+  // const [state, setState] = useState(1);
+  return (
+    // <div className="border" onClick={() => setState(state + 1)}>
+    //   我是func组建-name-{props.name} -{state}
+    // </div>
+    <div className="border">我是func组建-name-{props.name}</div>
+  );
 }
 var jsx = (
   <div className="border">

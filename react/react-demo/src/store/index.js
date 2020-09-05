@@ -42,32 +42,32 @@ const store = createStore(
 
 export default store;
 
-// function logger({ getState }) {
-//   return (next) => (action) => {
-//     // console.log("**************");
+function logger1({ getState }) {
+  return (next) => (action) => {
+    // console.log("**************");
 
-//     //dispatch(action)
-//     let returnVal = next(action);
-//     // console.log(getState());
-//     // console.log("**************");
-//     return returnVal;
-//   };
-// }
+    //dispatch(action)
+    let returnVal = next(action);
+    // console.log(getState());
+    // console.log("**************");
+    return returnVal;
+  };
+}
 
-// function thunk({ getState, dispatch }) {
-//   return (next) => (action) => {
-//     // console.log(next);
-//     // console.log(action);
-//     // console.log(getState);
-//     console.log(action);
-//     console.log(123456);
-//     if (typeof action == "function") {
-//       //   console.log(2223344);
-//       return action(dispatch, getState);
-//     }
-//     return next(action);
-//   };
-// }
+function thunk1({ getState, dispatch }) {
+  return (next) => (action) => {
+    // console.log(next);
+    // console.log(action);
+    // console.log(getState);
+    console.log(action);
+    console.log(123456);
+    if (typeof action == "function") {
+      //   console.log(2223344);
+      return action(dispatch, getState);
+    }
+    return next(action);
+  };
+}
 
 // import { createStore, combineReducers } from "redux";
 

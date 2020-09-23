@@ -6,6 +6,7 @@ const path = require('path');
 
 const glob = require('glob')
 const getEntry=()=>{
+    //等价交换，炼金术不变的原则
     const entry={}
     const htmlWebpackPlugins = []
     const files = glob.sync(path.join(__dirname,'./src/*/index.js'))
@@ -57,7 +58,8 @@ module.exports={
                     loader:"file-loader",
                     options:{
                         name:'[name]-[hash].[ext]',
-                        outputPath:'fonts/'
+                        outputPath:'font/',
+                        publicPath:'../font/',
                     }
                 }
             }

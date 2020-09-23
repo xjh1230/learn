@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "webfont";
+    font-display: swap;
+    src: url("../font/webfont.woff2") format("woff2");
+}
+body{
+    font-family: "webfont" !important;
+}
+div{
+    background-color: aqua;
+    font-size: 30px;
+}

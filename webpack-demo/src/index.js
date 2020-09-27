@@ -1,24 +1,23 @@
-import less from '../style/index-less.less'
-import css from '../style/index.css'
 console.log('index')
 const promises = [
     Promise.resolve(1),
-    new Promise((reslove,reject)=>{
+    new Promise((reslove, reject) => {
         setTimeout(() => {
             reslove(10)
         }, 1000);
     }),
-    new Promise((reslove,reject)=>{
+    new Promise((reslove, reject) => {
         setTimeout(() => {
             reject(10)
-            // reslove(20)
+                // reslove(20)
         }, 1000);
     })
 ]
 
-Promise.all(promises).then(s=>{
+Promise.all(promises).then(s => {
     console.log(s)
-}).catch(err=>{
+}).catch(err => {
     console.log(err)
 })
 console.log(1234)
+console.log('123')

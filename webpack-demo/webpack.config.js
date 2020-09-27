@@ -47,6 +47,7 @@ module.exports = {
     },
     module: {
         rules: [{
+<<<<<<< HEAD
                 test: /\.less$/,
                 use: ['my-style-loader', 'my-css-loader', 'my-less-loader']
             }, {
@@ -68,6 +69,27 @@ module.exports = {
             //     use: 'babel-loader'
             // }
         ]
+=======
+            test: /\.less$/,
+            use: ['my-style-loader', 'my-css-loader', 'my-less-loader']
+        }, {
+            test: /\.css$/,
+            use: [miniCssExtractPlugin.loader, 'css-loader']
+        }, {
+            test: /\.woff2?$/,
+            use: {
+                loader: "file-loader",
+                options: {
+                    name: '[name]-[hash].[ext]',
+                    outputPath: 'font/',
+                    publicPath: '../font/',
+                }
+            }
+        }, {
+            test: /\.js$/,
+            use: 'babel-loader'
+        }]
+>>>>>>> c70aef54622ea94d3cce81ec53bd107aaeac4ddf
     },
 
     plugins: [

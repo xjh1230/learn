@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script type="module">
+        console.log(typeof button); // object：脚本可以“看见”下面的 button // 因为模块是被延迟的（deferred，所以模块脚本会在整个页面加载完成后才运行
+    </script>
+
+    <script>
+        console.log(typeof button); // Error: button is undefined，脚本看不到下面的元素
+        // 常规脚本会立即运行，常规脚本的运行是在在处理页面的其余部分之前进行的
+    </script>
+
+    <button id="button">Button</button>
+</body>
+
+</html>

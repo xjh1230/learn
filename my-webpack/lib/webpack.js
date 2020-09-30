@@ -33,21 +33,23 @@ module.exports = class webpack {
         this.file(obj)
     }
     parse(entryFile) {
-        console.log('entryFile', entryFile)
         const source = fs.readFileSync(entryFile, 'utf-8')
         const ast = paser.parse(source, {
             sourceType: "module"
         })
         const dependencies = {}
+
         traverse(ast, {
             ImportDeclaration({ node }) {
+                // console.log('node', node)
                 const realPath = `./${path.join(path.dirname(entryFile),node.source.value)}`
                 dependencies[node.source.value] = realPath
             }
         })
         const { code } = transformFromAst(ast, null, {
-            presets: ["@babel/preset-env"]
-        })
+                presets: ["@babel/preset-env"]
+            })
+            // console.log(ast, '-------------', code, '22222222222')
         return {
             entryFile,
             dependencies,

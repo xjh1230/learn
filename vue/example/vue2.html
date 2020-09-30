@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <div id="app">
         <ul>
             <li ref="items" v-for="item in items" :id="item" :key="item">{{item}}</li>
@@ -15,15 +17,40 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello Vue!',
-            items:[1,2,3]
-        },
-        mounted: function () {
-            console.log(this.$refs.items)
-        }
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                items: [1, 2, 3]
+            },
+            mounted: function() {
+                console.log(this.$refs.items)
+            }
         })
+
+
+        var lengthOfLIS = function(nums) {
+            let n = nums.length;
+            if (n == 0) {
+                return 0;
+            }
+            let dp = new Array(n).fill(1);
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (nums[j] < nums[i]) {
+                        dp[i] = Math.max(dp[i], dp[j] + 1);
+                    }
+                }
+            }
+            return Math.max(...dp)
+        };
+        var arr = [1, 7, 2, 3, 4, 2, 3, 4]
+        console.log(lengthOfLIS(arr))
+    </script>
+
+    <script type="module">
+        console.log(import.meta)
+
     </script>
 </body>
+
 </html>

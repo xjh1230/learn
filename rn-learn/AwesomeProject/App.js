@@ -24,7 +24,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+import ChangeUserName from './ChangeUserName';
+const App = ChangeUserName;
+const App1: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />

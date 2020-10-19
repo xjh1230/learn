@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
- 
+
+import App from './9-layout'
 
 // const App1: () => React$Node = () => {
 //   return (
@@ -64,7 +65,7 @@ function UserNameScreen({navigation, route}) {
 
 const Stack = createStackNavigator();
 
-export default function ChangeUserName() {
+ function ChangeUserName() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -75,6 +76,8 @@ export default function ChangeUserName() {
   );
 }
 
+
+export default App
 const styles = StyleSheet.create({
     container: {
         flex: 1,

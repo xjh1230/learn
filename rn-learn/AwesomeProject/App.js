@@ -12,8 +12,8 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import App from './9-layout'
-
+// import App from './9-layout'
+import App from './movie-seat'
 // const App1: () => React$Node = () => {
 //   return (
 //     <View style={styles.container}>

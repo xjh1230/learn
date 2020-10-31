@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/find/Company.dart';
 import 'package:flutter_demo/find/CompanyItem.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'dart:convert';
+
 class FindScreen extends StatefulWidget {
   FindScreen({Key key}) : super(key: key);
 
@@ -11,12 +15,15 @@ class FindScreen extends StatefulWidget {
 
 class _FindScreenState extends State<FindScreen> {
   List<Company> _dataList = [];
+  int page = 1;
 
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   @override
   void initState() {
     super.initState();
 
-    getDataList();
+    getDateListFromServer(true);
   }
 
   getDataList() {
@@ -107,17 +114,77 @@ class _FindScreenState extends State<FindScreen> {
     });
   }
 
+//原来还可以这么玩
+  getDateListFromServer(bool replaced) async {
+    if (replaced) {
+      page = 1;
+    }
+    String url = 'http://m.app.haosou.com/index/getData?type=1&page=$page';
+    var response = await http.get(url);
+    var data = response.body;
+    var json = jsonDecode(data);
+    setState(() {
+      page = ++page;
+      if (replaced) {
+        _dataList = Company.fromMapData(json);
+      } else {
+        _dataList.addAll(Company.fromMapData(json));
+      }
+    });
+  }
+
+  void _onRefresh() async {
+    await getDateListFromServer(true);
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    await getDateListFromServer(false);
+    _refreshController.loadComplete();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: new Text('发现'),
-        ),
-        body: ListView.builder(
-            itemCount: _dataList.length,
-            itemBuilder: (context, index) {
-              var model = _dataList[index];
-              return CompanyItem(model);
-            }));
+    // return Scaffold(
+    //     appBar: AppBar(
+    //       title: new Text('发现'),
+    //     ),
+    //     body: ListView.builder(
+    //         itemCount: _dataList.length,
+    //         itemBuilder: (context, index) {
+    //           var model = _dataList[index];
+    //           return CompanyItem(model);
+    //         }));
+
+    if (_dataList.isEmpty) {
+      return new Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return SmartRefresher(
+      controller: _refreshController,
+      enablePullDown: true,
+      enablePullUp: true,
+      header: ClassicHeader(
+          refreshingText: '正在加载中...',
+          idleText: '下拉刷新',
+          completeText: '加载完成',
+          failedText: '数据刷新异常',
+          releaseText: '松开刷新'),
+      footer: ClassicFooter(
+          idleText: '加载更多数据', loadingText: '玩命加载中...', noDataText: '没有更多数据'),
+      onRefresh: _onRefresh,
+      onLoading: _onLoading,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          var model = _dataList[index];
+          return InkWell(
+            child: CompanyItem(model),
+            onTap: () {},
+          );
+        },
+        itemCount: _dataList.length,
+      ),
+    );
   }
 }

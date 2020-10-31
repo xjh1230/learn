@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/find/Company.dart';
 
+import 'SecondScreen.dart';
+
 class CompanyItem extends StatelessWidget {
   final Company model;
 
   CompanyItem(this.model);
 
+  void _onPressed(context, name) {
+    print(name);
+    Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => new SecondScreen(name)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
+      height: 180,
       padding: EdgeInsets.all(5),
       child: Card(
         elevation: 5, //不用背，学规律
@@ -58,6 +66,7 @@ class CompanyItem extends StatelessWidget {
                       ],
                     )),
               ]),
+              Divider(),
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -65,10 +74,10 @@ class CompanyItem extends StatelessWidget {
                     '热招:' + model.hot + '等' + model.count + '个岗位',
                     style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
-                  new Text(
-                    '>',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
-                  ),
+                  IconButton(
+                    icon: Icon(Icons.chevron_right, color: Colors.grey),
+                    onPressed: () => _onPressed(context, model.name),
+                  )
                 ],
               )
             ],

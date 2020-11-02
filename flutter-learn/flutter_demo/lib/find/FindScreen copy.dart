@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/find/Company.dart';
 import 'package:flutter_demo/find/CompanyItem.dart';
-import 'package:flutter_demo/find/SecondScreen.dart';
-import 'package:flutter_demo/provider/CompanyListProvider.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'dart:convert';
-import 'package:provider/provider.dart';
 
-class FindScreen extends StatefulWidget {
-  FindScreen({Key key}) : super(key: key);
+class FindScreenOld extends StatefulWidget {
+  FindScreenOld({Key key}) : super(key: key);
 
   @override
-  _FindScreenState createState() => _FindScreenState();
+  _FindScreenOldState createState() => _FindScreenOldState();
 }
 
-class _FindScreenState extends State<FindScreen> {
+class _FindScreenOldState extends State<FindScreenOld> {
   List<Company> _dataList = [];
-  CompanyListProvider provider;
   int page = 1;
 
   RefreshController _refreshController =
@@ -27,9 +23,6 @@ class _FindScreenState extends State<FindScreen> {
   void initState() {
     super.initState();
 
-    //listen的含义
-    provider = Provider.of<CompanyListProvider>(context, listen: false);
-    provider.refrshData();
     getDateListFromServer(true);
   }
 
@@ -141,79 +134,57 @@ class _FindScreenState extends State<FindScreen> {
   }
 
   void _onRefresh() async {
-    // await getDateListFromServer(true);
-    // _refreshController.refreshCompleted();
-    bool isSuccess = await provider.getDateListFromServer(true);
-    if (isSuccess) {
-      _refreshController.refreshCompleted();
-    } else {
-      _refreshController.refreshFailed();
-    }
+    await getDateListFromServer(true);
+    _refreshController.refreshCompleted();
   }
 
   void _onLoading() async {
-    // await getDateListFromServer(false);
-    // _refreshController.loadComplete();
-    bool isSuccess = await provider.getDateListFromServer(false);
-    if (isSuccess) {
-      _refreshController.loadComplete();
-    } else {
-      _refreshController.loadFailed();
-    }
+    await getDateListFromServer(false);
+    _refreshController.loadComplete();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: new Text('江湖再见'),
-        ),
-        body: _buildContent());
-  }
+    // return Scaffold(
+    //     appBar: AppBar(
+    //       title: new Text('发现'),
+    //     ),
+    //     body: ListView.builder(
+    //         itemCount: _dataList.length,
+    //         itemBuilder: (context, index) {
+    //           var model = _dataList[index];
+    //           return CompanyItem(model);
+    //         }));
 
-  Widget _buildContent() {
-    return Consumer<CompanyListProvider>(
-      builder: (context, provider, _) {
-        return IndexedStack(
-          index: provider.showValue,
-          children: <Widget>[
-            Center(
-              child: CircularProgressIndicator(),
-            ),
-            SmartRefresher(
-              controller: _refreshController,
-              enablePullDown: true,
-              enablePullUp: true,
-              header: ClassicHeader(
-                  refreshingText: '正在加载中...',
-                  idleText: '下拉刷新',
-                  completeText: '加载完成',
-                  failedText: '数据刷新异常',
-                  releaseText: '松开刷新'),
-              footer: ClassicFooter(
-                idleText: '加载更多数据',
-                loadingText: '玩命加载中...',
-                noDataText: '没有更多数据',
-              ),
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  var model = provider.companyList[index];
-                  return InkWell(
-                    child: CompanyItem(model),
-                    onTap: () {
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => SecondScreen(model.name)));
-                    },
-                  );
-                },
-                itemCount: provider.companyList.length,
-              ),
-            )
-          ],
-        );
-      },
+    if (_dataList.isEmpty) {
+      return new Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return SmartRefresher(
+      controller: _refreshController,
+      enablePullDown: true,
+      enablePullUp: true,
+      header: ClassicHeader(
+          refreshingText: '正在加载中...',
+          idleText: '下拉刷新',
+          completeText: '加载完成',
+          failedText: '数据刷新异常',
+          releaseText: '松开刷新'),
+      footer: ClassicFooter(
+          idleText: '加载更多数据', loadingText: '玩命加载中...', noDataText: '没有更多数据'),
+      onRefresh: _onRefresh,
+      onLoading: _onLoading,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          var model = _dataList[index];
+          return InkWell(
+            child: CompanyItem(model),
+            onTap: () {},
+          );
+        },
+        itemCount: _dataList.length,
+      ),
     );
   }
 }

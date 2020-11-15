@@ -1,0 +1,24 @@
+{
+  "name": "jumpfloor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/runtime-core": "^3.0.2",
+    "pixi.js": "^5.3.3"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

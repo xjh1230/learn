@@ -44,6 +44,7 @@ section div {
   /* 设置元素的倒影效果 below 是倒影效果在元素下方 15px 是元素和倒影的距离 后面的属性和背景渐变色是一个属性 设置了一个从下到上由背景透明色过渡到设置了不透明度的白色 */
   -webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 10%, rgba(255, 255, 255, 0.3));
 }
+
 section div:nth-child(1) {
   transform: translateZ(300px);
   background-color: #c14c39;

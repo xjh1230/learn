@@ -7,9 +7,10 @@ export function login(data) {
         setTimeout(() => {
             let tick = new Date().getTime().toString();
             mp.set(tick, [data.userName]);
-            return {
-                data: new Date().getTime(),
-            };
+            // return {
+            //     data: tick,
+            // };
+            reslove({data:tick});
         }, 100);
     });
 }
@@ -17,7 +18,7 @@ export function login(data) {
 export function getInfo(token) {
     return new Promise((reslove, reject) => {
         setTimeout(() => {
-            return mp.get(token);
+            reslove(mp.get(token));
         }, 100);
     });
 }

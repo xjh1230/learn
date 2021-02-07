@@ -22,7 +22,7 @@ router.beforeEach(async(to, from, next) => {
             next({...to, replace: true });
         }
     } else {
-        if (whiteList.indexOf(to.patj) != -1) {
+        if (whiteList.indexOf(to.path) != -1) {
             next();
         } else {
             next("/login?redirect=" + to.path);

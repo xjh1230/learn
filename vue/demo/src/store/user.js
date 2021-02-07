@@ -21,6 +21,8 @@ const actions = {
     return login(userInfo).then((res) => {
       commit("setToken", res.data);
       localStorage.setItem("token", res.data);
+    },err=>{
+      console.log(err);
     });
     // const { username } = userInfo;
     // return new Promise((resolve, reject) => {

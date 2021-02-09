@@ -1,0 +1,39 @@
+.shadow {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border: 1px solid red;
+}
+
+
+/* .shadow::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -50px;
+    left: -50px;
+    box-shadow: 50px 50px #000, 150px 50px #000, 250px 50px #000, 50px 100px #000, 150px 100px #000, 250px 100px #000, 50px 150px #000, 150px 150px #000, 250px 150px #000, 50px 200px #000, 150px 200px #000, 250px 200px #000, 50px 250px #000, 150px 250px #000, 250px 250px #000;
+} */
+
+div {
+    position: relative;
+    width: 600px;
+    height: 100px;
+    background: hsl(48, 100%, 50%);
+    border-radius: 20px;
+}
+
+div::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    bottom: 0;
+    border-radius: 10px;
+    background: hsl(48, 100%, 20%);
+    transform: translate(0, -15%) rotate(-4deg);
+    transform-origin: center center;
+    box-shadow: 0 0 20px 15px hsl(48, 100%, 20%);
+}

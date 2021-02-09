@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="shadow"></div>
+    <button id="btn">btn</button>
+    <button id="btn2">解绑</button>
+    <button id="btn3">添加绑定</button>
+    <script>
+        let fn = f1.bind({
+            name: '局部Name'
+        }, 2)
+        let fn2 = f1.bind({
+            name: '局部Name'
+        }, 3)
+        var name = "全局Name"
+
+        function unbind() {
+            console.log('btn2');
+            btn.removeEventListener('click', fn);
+        }
+        btn2.addEventListener('click', unbind)
+        btn3.addEventListener('click', function() {
+            console.log('btn3');
+            btn.addEventListener('click', fn)
+            btn.addEventListener('click', fn2)
+            btn.addEventListener('click', f2)
+        })
+
+
+        //方法
+        function f1(a) {
+            console.log(this.name, a);
+        };
+
+        function f2() {
+            console.log("222")
+        };
+    </script>
+</body>
+
+</html>

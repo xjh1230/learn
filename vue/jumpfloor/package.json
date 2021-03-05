@@ -1,24 +1,29 @@
 {
-  "name": "jumpfloor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack-dev-server"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@vue/runtime-core": "^3.0.2",
-    "pixi.js": "^5.3.3"
-  },
-  "devDependencies": {
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^4.5.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "name": "jumpfloor",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack --mode production",
+        "dev": "webpack-dev-server --mode development"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@vue/runtime-core": "^3.0.2",
+        "pixi.js": "^5.3.3"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "dotenv": "^8.2.0",
+        "dotenv-expand": "^5.1.0",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^4.5.0",
+        "minimist": "^1.2.5",
+        "process": "^0.11.10",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
 }

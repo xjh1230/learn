@@ -39,9 +39,10 @@ export const patchProp = (
             //方式2：直接方式
             el.lineStyle(circleLineWidth, circleColor, circleAlpha);
             el.drawCircle(0, 0, radius);
+            el.endFill();
             break;
         default:
-            // console.log(arguments);
+            // console.log(nextValue, key);
             el[key] = nextValue;
             break;
     }

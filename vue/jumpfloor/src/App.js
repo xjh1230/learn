@@ -1,23 +1,26 @@
-import {ref,computed,defineComponent,h} from "@vue/runtime-core";
+import { ref, computed, defineComponent, h } from "@vue/runtime-core";
 
-import {getPage} from "./router/index"
+import { getPage } from "./router/index"
+
 
 
 export default defineComponent({
-    setup(){
-        const currentPageName = ref("StartPage");
-        const currentPage=computed(()=>{
-           return getPage(currentPageName.value)
+    setup() {
+        const currentPageName = ref("GamePage");
+        // const currentPageName = ref("StartPage");
+        // const currentPageName = ref("GamePage");
+        const currentPage = computed(() => {
+            return getPage(currentPageName.value)
         });
-        return{
+        return {
             currentPage,
             currentPageName
         }
     },
-    render(ctx){
-        return h("Container",[
-            h(ctx.currentPage,{
-                onChangePage(page){
+    render(ctx) {
+        return h("Container", [
+            h(ctx.currentPage, {
+                onChangePage(page) {
                     ctx.currentPageName = page;
                 }
             })

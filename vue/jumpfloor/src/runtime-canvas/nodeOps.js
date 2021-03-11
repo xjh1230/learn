@@ -22,7 +22,7 @@ export const nodeOps = {
                 // ele.beginFill(0x66ccff); //0x66ccff
                 ele.drawRect(0, 0, 1, 1);
                 // ele.endFill();
-                ele.interactive = true;
+                // ele.interactive = true;
                 break;
             case eleMap.Circle:
                 //方式1：子元素方式
@@ -31,8 +31,7 @@ export const nodeOps = {
                 // ele.circle = cir;
                 //方式2：直接方式
                 ele = new Graphics();
-                ele.drawCircle(0, 0, 1);
-                ele.interactive = true;
+                // ele.drawCircle(0, 0, 1);
                 break;
         }
         return ele;
